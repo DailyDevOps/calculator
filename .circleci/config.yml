@@ -1,4 +1,6 @@
 version: 2.1
+orbs:
+  snyk: snyk/snyk@0.0.11
 jobs:
   build:
     docker:
@@ -20,3 +22,7 @@ jobs:
             key: v1-dependencies-{{ checksum "package.json" }}
 
       - run: yarn lint
+      - snyk/scan:
+          fail-on-issues: false
+          monitor-on-build: false
+          severity-threshold: high
