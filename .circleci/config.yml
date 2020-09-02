@@ -1,6 +1,7 @@
 version: 2.1
 orbs:
   snyk: snyk/snyk@0.0.11
+  docker: circleci/docker@1.4.0
 jobs:
   build:
     docker:
@@ -26,3 +27,6 @@ jobs:
           fail-on-issues: false
           monitor-on-build: false
           severity-threshold: medium
+          
+      - docker/publish:
+          image: $CIRCLE_PROJECT_USERNAME/$CIRCLE_PROJECT_REPONAME
